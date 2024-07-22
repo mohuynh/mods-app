@@ -1,0 +1,97 @@
+{
+      "mods": [
+            {
+                  "name": "nom1",
+                  "author": "auteur1",
+                  "size": 1,
+                  "expansions": [
+                        "expansion1",
+                        "expansion2",
+                        "expansion3"
+                  ],
+                  "type": "top",
+                  "age": [
+                        "toddler",
+                        "child",
+                        "teen",
+                        "young adult",
+                        "adult",
+                        "elder"
+                  ],
+                  "gender": [
+                        "female",
+                        "male"
+                  ],
+                  "clothing_category": [
+                        "everyday",
+                        "formal",
+                        "underwear",
+                        "sleepwear",
+                        "swimwear",
+                        "athletic"
+                  ]
+            },
+            {
+                  "name": "nom2",
+                  "author": "auteur2",
+                  "size": 2,
+                  "expansions": [
+                        "expansion1",
+                        "expansion2",
+                        "expansion3"
+                  ],
+                  "type": "bottom",
+                  "age": [
+                        "toddler",
+                        "child",
+                        "teen",
+                        "young adult",
+                        "adult",
+                        "elder"
+                  ],
+                  "gender": [
+                        "female",
+                        "male"
+                  ],
+                  "clothing_category": [
+                        "everyday",
+                        "formal",
+                        "underwear",
+                        "sleepwear",
+                        "swimwear",
+                        "athletic"
+                  ]
+            },
+            {
+                  "name": "nom3",
+                  "author": "auteur3",
+                  "size": 3,
+                  "expansions": [
+                        "expansion1",
+                        "expansion2",
+                        "expansion3"
+                  ],
+                  "type": "outfit",
+                  "age": [
+                        "toddler",
+                        "child",
+                        "teen",
+                        "young adult",
+                        "adult",
+                        "elder"
+                  ],
+                  "gender": [
+                        "female",
+                        "male"
+                  ],
+                  "clothing_category": [
+                        "everyday",
+                        "formal",
+                        "underwear",
+                        "sleepwear",
+                        "swimwear",
+                        "athletic"
+                  ]
+            }
+      ]
+}
