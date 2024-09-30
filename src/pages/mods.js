@@ -1,13 +1,24 @@
-import TableSlice from "../app/components/tableSlice";
-var data = require("../app/db.json");
+import { useEffect, useState } from "react";
+import TableMods from "../app/components/tableMods";
+import { getModsList } from "@/app/services/api";
+import { deleteMod } from "@/app/services/api";
+import Link from 'next/link';
 
 export default function mods() {
-  var dataMods = data.mods
 
-  const thead = () => {
-    return Object.keys(dataMods[0]);
-  }
+  const [dataMods, setDataMods] = useState([])
 
-  return <TableSlice theadData={thead()} tbodyData={dataMods} />
+  var refreshModsList = () => {
+    getModsList().then((result) => {
+      setDataMods(result)
+    })
+  };
+
+  useEffect(refreshModsList, [])
+
+  const thead = ["name", "author"]
+  return <TableMods theadData={thead} tbodyData={dataMods} onRowDelete={(row) => {
+    deleteMod(row.id).then(refreshModsList);
+  }} />
 }
 

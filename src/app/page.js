@@ -1,15 +1,11 @@
-import styles from "./page.module.css";
 import Homepage from "./components/homepage";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home() {
- 
+
   return (
-    <main className={styles.main}>
-      <Homepage/>
+    <main>
+      <Homepage />
     </main>)
 
 }
-
-
-

@@ -1,25 +1,31 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-var db = require("../../app/db.json");
+import { useEffect, useState } from "react";
+import { getMod } from "@/app/services/api";
+
 
 export default function ModsDetailsPage() {
     const router = useRouter();
     const modId = router.query.modId
 
+    const [mod, setMod] = useState(null)
 
-    const mod = db.mods.find((elem, index) => {
-        return (elem.name === modId)// return true ou false
-    })
+    useEffect(() => {
+        getMod(modId).then((result) => {
+            setMod(result)
+        })
+    }, [])
 
     return <div>
         {mod ?
-            <div><p>{mod.author}</p>
-                <p>{mod.name}</p></div> :
+            <div><ul>
+                {Object.entries(mod).map((keyValue, index) => {
+                    return <li key={index}>{keyValue[0]} : {keyValue[1]}</li>
+                })}
+            </ul></div> :
             <div />
         }
         <div><Link href={"/"}>Accueil</Link></div>
         <div><Link href={"/mods"}>Mods</Link></div>
     </div>
 }
-
-// Faire nouveau component pour tableau (sans slice()) ou modifier TableSlice?
