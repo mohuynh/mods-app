@@ -36,3 +36,44 @@ export async function createMod(formDataMod) {
       const data = await reponse.json();
       return data;
 }
+
+//
+
+export async function getModdersList() {
+      const reponse = await fetch("http://localhost:8000/modders");
+
+      const data = await reponse.json();
+      return data;
+}
+
+export async function getModder(modderId) {
+      const reponse = await fetch("http://localhost:8000/modders/" + modderId);
+
+      const data = await reponse.json();
+      return data;
+}
+
+export async function deleteModder(modderId) {
+      const reponse = await fetch("http://localhost:8000/modders/" + modderId, { method: "DELETE", mode: "cors" });
+
+      const data = await reponse.json();
+      return data;
+}
+
+export async function createModder(formDataModder) {
+      const reponse = await fetch("http://localhost:8000/modders/", {
+            method: "POST", mode: "cors", body: JSON.stringify(formDataModder)
+      });
+
+      const data = await reponse.json();
+      return data;
+}
+
+export async function updateModder(modderId, formDataModder) {
+      const reponse = await fetch("http://localhost:8000/modders/" + modderId, {
+            method: "PUT", mode: "cors", body: JSON.stringify(formDataModder)
+      });
+
+      const data = await reponse.json();
+      return data;
+}

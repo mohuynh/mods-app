@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TableMods from "../app/components/tableMods";
 import { getModsList } from "@/app/services/api";
 import { deleteMod } from "@/app/services/api";
-import Link from 'next/link';
+
 
 export default function mods() {
 
@@ -17,7 +17,7 @@ export default function mods() {
   useEffect(refreshModsList, [])
 
   const thead = ["name", "author"]
-  return <TableMods theadData={thead} tbodyData={dataMods} onRowDelete={(row) => {
+  return <TableMods theadData={thead} tbodyData={dataMods} tableName={"mods"} onRowDelete={(row) => {
     deleteMod(row.id).then(refreshModsList);
   }} />
 }

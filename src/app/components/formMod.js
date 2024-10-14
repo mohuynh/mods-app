@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { getMod, updateMod } from "../services/api";
-
+import { useRouter } from "next/router";
 
 export default function FormMod({ modId }) {
       const [formDataMod, setFormDataMod] = useState([])
+      const router = useRouter()
 
       useEffect(() => {
             getMod(modId).then((formDataMod) => {
@@ -19,7 +20,12 @@ export default function FormMod({ modId }) {
       const handleSubmit = (event) => {
             event.preventDefault()
             updateMod(modId, formDataMod)
-            alert("Modification effectuée")
+                  .then((result) => {
+                        if (!result.hasOwnProperty('message')) {
+                              alert("Entréé modifiée")
+                              router.push("/mods/" + result.id)
+                        }
+                  })
       }
 
       return <form onSubmit={handleSubmit}>
