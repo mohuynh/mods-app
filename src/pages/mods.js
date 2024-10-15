@@ -16,7 +16,7 @@ export default function mods() {
 
   useEffect(refreshModsList, [])
 
-  const thead = ["name", "author"]
+  const thead = ["name", "expansion"]
   return <TableMods theadData={thead} tbodyData={dataMods} tableName={"mods"} onRowDelete={(row) => {
     deleteMod(row.id).then(refreshModsList);
   }} />

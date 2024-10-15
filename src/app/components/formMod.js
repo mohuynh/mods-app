@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMod, updateMod } from "../services/api";
+import { getMod, updateMod, getModdersList } from "../services/api";
 import { useRouter } from "next/router";
 
 export default function FormMod({ modId }) {
@@ -16,6 +16,13 @@ export default function FormMod({ modId }) {
             const { name, value } = event.target
             setFormDataMod((prevFormaDataMod) => ({ ...prevFormaDataMod, [name]: value }))
       }
+
+      const [formDataModder, setFormDataModder] = useState([])
+      useEffect(() => {
+            getModdersList().then((result) => {
+                  setFormDataModder(result)
+            })
+      })
 
       const handleSubmit = (event) => {
             event.preventDefault()
@@ -38,11 +45,6 @@ export default function FormMod({ modId }) {
             <div>
                   <label htmlFor="name">Name</label>
                   <input type="text" id="name" name="name" value={formDataMod.name} onChange={handleChange} />
-            </div>
-
-            <div>
-                  <label htmlFor="author">Author</label>
-                  <input type="text" id="author" name="author" value={formDataMod.author} onChange={handleChange} />
             </div>
 
             <div>
@@ -73,6 +75,15 @@ export default function FormMod({ modId }) {
             <div>
                   <label htmlFor="size">Size</label>
                   <input type="text" id="size" name="size" value={formDataMod.size} onChange={handleChange} />
+            </div>
+
+            <div>
+                  <label>Mod Author</label>
+                  <select id="id_author" name="id_author" onChange={handleChange}>
+                        {formDataModder.map((row) => {
+                              return <option value={row.id}>{row.name}</option>
+                        })}
+                  </select>
             </div>
 
             <div>
