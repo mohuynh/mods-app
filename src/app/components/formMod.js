@@ -22,7 +22,7 @@ export default function FormMod({ modId }) {
             getModdersList().then((result) => {
                   setFormDataModder(result)
             })
-      })
+      }, [])
 
       const handleSubmit = (event) => {
             event.preventDefault()
