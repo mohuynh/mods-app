@@ -20,7 +20,8 @@ export default function FormModder({ modderId }) {
 
       const handleSubmit = (event) => {
             event.preventDefault()
-            updateModder(modderId, formDataModder)
+            var accessToken = localStorage.getItem("jwt-token")
+            updateModder(accessToken, modderId, formDataModder)
                   .then((result) => {
                         if (!result.hasOwnProperty('message')) {
                               alert("Entréé modifiée")

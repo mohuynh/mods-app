@@ -17,16 +17,17 @@ export default function FormMod({ modId }) {
             setFormDataMod((prevFormaDataMod) => ({ ...prevFormaDataMod, [name]: value }))
       }
 
-      const [formDataModder, setFormDataModder] = useState([])
-      useEffect(() => {
-            getModdersList().then((result) => {
-                  setFormDataModder(result)
-            })
-      }, [])
+      // const [formDataModder, setFormDataModder] = useState([])
+      // useEffect(() => {
+      //       getModdersList().then((result) => {
+      //             setFormDataModder(result)
+      //       })
+      // }, [])
 
       const handleSubmit = (event) => {
             event.preventDefault()
-            updateMod(modId, formDataMod)
+            var accessToken = localStorage.getItem("jwt-token")
+            updateMod(accessToken, modId, formDataMod)
                   .then((result) => {
                         if (!result.hasOwnProperty('message')) {
                               alert("Entréé modifiée")
@@ -77,14 +78,14 @@ export default function FormMod({ modId }) {
                   <input type="text" id="size" name="size" value={formDataMod.size} onChange={handleChange} />
             </div>
 
-            <div>
+            {/* <div>
                   <label>Mod Author</label>
                   <select id="id_author" name="id_author" onChange={handleChange}>
                         {formDataModder.map((row) => {
                               return <option value={row.id}>{row.name}</option>
                         })}
                   </select>
-            </div>
+            </div> */}
 
             <div>
                   <button type="submit">Modifier</button>

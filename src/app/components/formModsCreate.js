@@ -7,12 +7,12 @@ export default function FormModCreate() {
       const [formDataMod, setFormDataMod] = useState([])
       const router = useRouter()
 
-      const [formDataModder, setFormDataModder] = useState([])
-      useEffect(() => {
-            getModdersList().then((result) => {
-                  setFormDataModder(result)
-            })
-      }, [])
+      // const [formDataModder, setFormDataModder] = useState([])
+      // useEffect(() => {
+      //       getModdersList().then((result) => {
+      //             setFormDataModder(result)
+      //       })
+      // }, [])
 
       const handleChange = (event) => {
             const { name, value } = event.target
@@ -21,7 +21,8 @@ export default function FormModCreate() {
 
       const handleSubmit = (event) => {
             event.preventDefault()
-            createMod(formDataMod)
+            var accessToken = localStorage.getItem("jwt-token")
+            createMod(accessToken, formDataMod)
                   .then((result) => {
                         if (!result.hasOwnProperty('message')) {
                               alert("Entréé ajouté")
@@ -73,14 +74,14 @@ export default function FormModCreate() {
                   <input type="text" id="size" name="size" value={formDataMod.size} onChange={handleChange} />
             </div>
 
-            <div>
+            {/* <div>
                   <label>Mod Author</label>
                   <select id="id_author" name="id_author" onChange={handleChange}>
                         {formDataModder.map((row) => {
                               return <option value={row.id}>{row.name}</option>
                         })}
                   </select>
-            </div>
+            </div> */}
 
             <div>
                   <button type="submit">Créer</button>

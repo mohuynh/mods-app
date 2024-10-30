@@ -8,7 +8,7 @@ export default function TableMods({ theadData, tbodyData, onRowDelete, tableName
                         <thead>
                               <tr>
                                     {theadData.map(heading => {
-                                          return <th key={heading["id"]}>{heading}</th>
+                                          return <th key={heading}>{heading}</th>
                                     })}
                               </tr>
                         </thead>
@@ -18,14 +18,13 @@ export default function TableMods({ theadData, tbodyData, onRowDelete, tableName
                                           {theadData.map((key) => {
                                                 return <td key={row[key]}>{row[key]}</td>
                                           })}
-                                          <td><Link href={`/${tableName}/${row.id}`}>voir</Link></td>
-                                          <td><Link href={`/${tableName}/update/${row.id}`}>modfier</Link></td>
-                                          <td><button onClick={() => onRowDelete(row)}>supprimer</button></td>
+                                          <td key="voir"><Link href={`/${tableName}/${row.id}`}>voir</Link></td>
+                                          <td key="modifier"><Link href={`/${tableName}/update/${row.id}`}>modfier</Link></td>
+                                          <td key="supprimer"><button onClick={() => onRowDelete(row)}>supprimer</button></td>
                                     </tr>
                               })}
                         </tbody>
                   </table>
-                  <div><Link href={`/${tableName}/create/`}>Créer nouvelle entrée</Link></div>
             </div>
       );
 }

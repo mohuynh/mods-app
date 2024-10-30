@@ -18,6 +18,7 @@ export default function modders() {
 
       const thead = ["name", "creation_date"]
       return <TableMods theadData={thead} tbodyData={dataModders} tableName={"modders"} onRowDelete={(row) => {
-            deleteModder(row.id).then(refreshModdersList);
+            var accessToken = localStorage.getItem("jwt-token")
+            deleteModder(accessToken, row.id).then(refreshModdersList);
       }} />
 }

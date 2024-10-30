@@ -17,22 +17,22 @@ export default function FormModderCreate() {
             createModder(formDataModder)
                   .then((result) => {
                         if (!result.hasOwnProperty('message')) {
-                              alert("Entréé ajouté")
-                              router.push("/modders/" + result.id)
+                              alert("Inscription réussie")
+                              //router.push("/")
+                        } else {
+                              alert("échec")
                         }
                   })
       }
 
       return <form onSubmit={handleSubmit}>
-
-            <div hidden>
-                  <label htmlFor="id">Id</label>
-                  <input type="text" id="id" name="id" value={formDataModder.id} onChange={handleChange} />
-            </div>
-
             <div>
                   <label htmlFor="name">Name</label>
                   <input type="text" id="name" name="name" value={formDataModder.name} onChange={handleChange} />
+            </div>
+            <div>
+                  <label htmlFor="mdp">Mot de passe</label>
+                  <input type="password" id="mdp" name="mdp" value={formDataModder.mdp} onChange={handleChange} />
             </div>
             <div>
                   <button type="submit">Créer</button>
