@@ -25,7 +25,7 @@ export default function FormModCreate() {
             createMod(accessToken, formDataMod)
                   .then((result) => {
                         if (!result.hasOwnProperty('message')) {
-                              alert("Entréé ajouté")
+                              alert("Mod added")
                               router.push("/mods/" + result.id)
                         }
                   })
@@ -73,15 +73,6 @@ export default function FormModCreate() {
                   <label htmlFor="size">Size</label>
                   <input type="text" id="size" name="size" value={formDataMod.size} onChange={handleChange} />
             </div>
-
-            {/* <div>
-                  <label>Mod Author</label>
-                  <select id="id_author" name="id_author" onChange={handleChange}>
-                        {formDataModder.map((row) => {
-                              return <option value={row.id}>{row.name}</option>
-                        })}
-                  </select>
-            </div> */}
 
             <div>
                   <button type="submit">Créer</button>

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 export default function FormModderLogin() {
       const [formDataModder, setFormDataModder] = useState([])
-      //const router = useRouter()
+      const router = useRouter()
 
       const handleChange = (event) => {
             const { name, value } = event.target
@@ -16,11 +16,11 @@ export default function FormModderLogin() {
             event.preventDefault()
             loginModder(formDataModder).then((result) => {
                   if (!result.hasOwnProperty('message')) {
-                        alert("Connexion réussie")
+                        alert("You're connected")
                         localStorage.setItem("jwt-token", result)
-                        //router.push("/modders/" + result.id)
+                        router.push("/")
                   } else {
-                        alert("échec")
+                        alert("Connection error")
                   }
             })
       }

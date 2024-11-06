@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import TableMods from "../app/components/tableMods";
-import { deleteModder, getModdersList } from "@/app/services/api";
+import Link from "next/link";
+import { getModdersList } from "@/app/services/api";
 
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function modders() {
 
@@ -17,8 +17,29 @@ export default function modders() {
       useEffect(refreshModdersList, [])
 
       const thead = ["name", "creation_date"]
-      return <TableMods theadData={thead} tbodyData={dataModders} tableName={"modders"} onRowDelete={(row) => {
-            var accessToken = localStorage.getItem("jwt-token")
-            deleteModder(accessToken, row.id).then(refreshModdersList);
-      }} />
+      return (
+            <div>
+                  <table>
+                        <thead>
+                              <tr>
+                                    {thead.map(heading => {
+                                          return <th key={heading}>{heading}</th>
+                                    })}
+                              </tr>
+                        </thead>
+                        <tbody>
+                              {dataModders.map((row, index) => {
+                                    return <tr key={index}>
+                                          {thead.map((key) => {
+                                                return <td key={row[key]}>{row[key]}</td>
+                                          })}
+                                          <td key="voir"><Link href={`/modders/${row.id}`}>voir</Link></td>
+                                          <td key="modifier"><Link href={`/modders/update/${row.id}`}>modfier</Link></td>
+                                          <td key="supprimer"><button onClick={() => onRowDelete(row)}>supprimer</button></td>
+                                    </tr>
+                              })}
+                        </tbody>
+                  </table>
+            </div>
+      );
 }

@@ -1,30 +1,39 @@
 import Link from 'next/link';
+import { Card, Row, Col } from 'react-bootstrap';
+import { getModdersList } from '../services/api';
+import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 
 
-export default function TableMods({ theadData, tbodyData, onRowDelete, tableName }) {
+export default function TableMods({ ModList }) {
+      const [idToNameMap, setIdToNameMap] = useState(new Map())
+
+      useEffect(() => {
+            getModdersList().then((result) => {
+                  var map = new Map(result.map((e) => [e.id, e.name]))
+                  setIdToNameMap(map)
+            })
+      }, [])
+
       return (
-            <div>
-                  <table>
-                        <thead>
-                              <tr>
-                                    {theadData.map(heading => {
-                                          return <th key={heading}>{heading}</th>
-                                    })}
-                              </tr>
-                        </thead>
-                        <tbody>
-                              {tbodyData.map((row, index) => {
-                                    return <tr key={index}>
-                                          {theadData.map((key) => {
-                                                return <td key={row[key]}>{row[key]}</td>
-                                          })}
-                                          <td key="voir"><Link href={`/${tableName}/${row.id}`}>voir</Link></td>
-                                          <td key="modifier"><Link href={`/${tableName}/update/${row.id}`}>modfier</Link></td>
-                                          <td key="supprimer"><button onClick={() => onRowDelete(row)}>supprimer</button></td>
-                                    </tr>
-                              })}
-                        </tbody>
-                  </table>
-            </div>
+            <>
+                  <Row xs={1} md={3} className="g-4">
+                        {ModList.map((mod, i) => (
+                              <Col key={i}>
+                                    <Card key={mod.id}>
+                                          <Card.Header className='bg-body-secondary'>{mod.name}</Card.Header>
+                                          <Card.Body className='bg-body-tertiary'>
+                                                <Card.Text>By <strong>{idToNameMap.get(mod.id_author)}</strong></Card.Text>
+                                                <Card.Text>at {mod.creation_date}</Card.Text>
+                                                <Link href={`/mods/${mod.id}`}><FontAwesomeIcon icon={faAnglesRight} /></Link>
+                                          </Card.Body>
+                                    </Card>
+                              </Col>
+                        ))}
+                  </Row>
+            </>
       );
+
+
 }
