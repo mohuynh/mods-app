@@ -9,14 +9,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-export default function mods() {
+export default function Mods() {
 
   const [dataMods, setDataMods] = useState([])
 
   var ModList = () => {
     getModsList().then((result) => {
       setDataMods(result)
-      console.log(result)
     })
   };
 

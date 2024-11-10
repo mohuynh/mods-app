@@ -9,17 +9,17 @@ import { faLock } from '@fortawesome/free-solid-svg-icons'
 
 export default function HeaderUser() {
       const [userConnected, setUserConnected] = useState(false);
-      const [userToken, setUserToken] = useState("")
+      const [userName, setUserName] = useState("")
 
       useEffect(() => {
             const token = localStorage.getItem("jwt-token")
 
             try {
                   const decoded = jwtDecode(token)
-                  setUserToken(decoded.username)
+                  setUserName(decoded.username)
                   setUserConnected(true)
             } catch (error) {
-                  setUserToken("guest")
+                  setUserName("guest")
                   setUserConnected(false)
             }
 
@@ -28,7 +28,7 @@ export default function HeaderUser() {
       const handleSubmit = () => {
             localStorage.removeItem("jwt-token")
             alert("You've been disconneted")
-            setUserToken("guest")
+            setUserName("guest")
             setUserConnected(false)
       }
 
@@ -50,7 +50,7 @@ export default function HeaderUser() {
                         </Nav>
                   </Container>
                   <Container className="justify-content-end">
-                        <NavbarText className="pe-3">Hello {userToken}</NavbarText>
+                        <NavbarText className="pe-3">Hello {userName}</NavbarText>
                         <Nav>
                               {
                                     userConnected ?

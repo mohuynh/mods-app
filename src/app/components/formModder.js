@@ -11,7 +11,7 @@ export default function FormModder({ modderId }) {
             getModder(modderId).then((formDataModder) => {
                   setFormDataModder(formDataModder)
             })
-      }, [])
+      }, [modderId])
 
       const handleChange = (event) => {
             const { name, value } = event.target

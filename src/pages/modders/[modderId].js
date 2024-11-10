@@ -14,7 +14,7 @@ export default function ModdersDetailsPage() {
             getModder(modderId).then((result) => {
                   setModder(result)
             })
-      }, [])
+      }, [modderId])
 
       return <div>
             {modder ?

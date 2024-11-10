@@ -4,7 +4,7 @@ import { getModdersList } from "@/app/services/api";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function modders() {
+export default function Modders() {
 
       const [dataModders, setDataModders] = useState([])
 

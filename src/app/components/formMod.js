@@ -10,7 +10,7 @@ export default function FormMod({ modId }) {
             getMod(modId).then((formDataMod) => {
                   setFormDataMod(formDataMod)
             })
-      }, [])
+      }, [modId])
 
       const handleChange = (event) => {
             const { name, value } = event.target

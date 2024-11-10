@@ -16,7 +16,7 @@ export default function ModsDetailsPage() {
         getMod(modId).then((result) => {
             setMod(result)
         })
-    }, [])
+    }, [modId])
 
     useEffect(() => {
         getModdersList().then((result) => {
@@ -62,7 +62,7 @@ export default function ModsDetailsPage() {
                 }).map((keyValue, index) => {
                     return <li key={index}>{keyValue[0]} : {keyValue[1]}</li>
                 })}
-                <li key="name">author's name: {idToNameMap.get(mod.id_author)}</li>
+                <li key="name">author&apos;s name: {idToNameMap.get(mod.id_author)}</li>
             </ul></div>
                 {RenderEditButtons()}
             </>
