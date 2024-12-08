@@ -1,81 +1,149 @@
-import { useState, useEffect } from "react"
-import { createMod, getModdersList } from "../services/api"
-import { useRouter } from "next/router"
+import { useState } from "react";
+import { createMod } from "../services/api";
+import { useRouter } from "next/router";
+import { Button, Card, Container, Form } from "react-bootstrap";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import FooterUser from "./footerUser";
+import HeaderUser from "./headerUser";
 
 export default function FormModCreate() {
-      const [formDataMod, setFormDataMod] = useState([])
-      const router = useRouter()
+  const [formDataMod, setFormDataMod] = useState([]);
+  const router = useRouter();
 
-      // const [formDataModder, setFormDataModder] = useState([])
-      // useEffect(() => {
-      //       getModdersList().then((result) => {
-      //             setFormDataModder(result)
-      //       })
-      // }, [])
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormDataMod((prevFormaDataMod) => ({
+      ...prevFormaDataMod,
+      [name]: value,
+    }));
+  };
 
-      const handleChange = (event) => {
-            const { name, value } = event.target
-            setFormDataMod((prevFormaDataMod) => ({ ...prevFormaDataMod, [name]: value }))
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    var accessToken = localStorage.getItem("jwt-token");
+    createMod(accessToken, formDataMod).then((result) => {
+      if (!result.hasOwnProperty("message")) {
+        alert("Mod added");
+        router.push("/mods/" + result.id);
+      } else {
+        alert(result["message"]);
       }
+    });
+  };
 
-      const handleSubmit = (event) => {
-            event.preventDefault()
-            var accessToken = localStorage.getItem("jwt-token")
-            createMod(accessToken, formDataMod)
-                  .then((result) => {
-                        if (!result.hasOwnProperty('message')) {
-                              alert("Mod added")
-                              router.push("/mods/" + result.id)
-                        }
-                  })
-      }
+  return (
+    <>
+      <header>
+        <HeaderUser />
+      </header>
+      <main>
+        <Container className="mt-4 w-50">
+          <Card>
+            <Card.Header>Create Mod</Card.Header>
+            <Card.Body>
+              <Form onSubmit={handleSubmit}>
+                <div hidden>
+                  <Form.Label htmlFor="id">Id</Form.Label>
+                  <Form.Control
+                    type="text"
+                    id="id"
+                    name="id"
+                    value={formDataMod.id}
+                    onChange={handleChange}
+                  />
+                </div>
 
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="name">Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formDataMod.name}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-      return <form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="expansion">Expansion</Form.Label>
+                  <Form.Control
+                    type="text"
+                    id="expansion"
+                    name="expansion"
+                    value={formDataMod.expansion}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-            <div hidden>
-                  <label htmlFor="id">Id</label>
-                  <input type="text" id="id" name="id" value={formDataMod.id} onChange={handleChange} />
-            </div>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="type">Type</Form.Label>
+                  <Form.Control
+                    type="text"
+                    id="type"
+                    name="type"
+                    value={formDataMod.type}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-            <div>
-                  <label htmlFor="name">Name</label>
-                  <input type="text" id="name" name="name" value={formDataMod.name} onChange={handleChange} />
-            </div>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="age">Age</Form.Label>
+                  <Form.Control
+                    type="text"
+                    id="age"
+                    name="age"
+                    value={formDataMod.age}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-            <div>
-                  <label htmlFor="expansion">Expansion</label>
-                  <input type="text" id="expansion" name="expansion" value={formDataMod.expansion} onChange={handleChange} />
-            </div>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="gender">Gender</Form.Label>
+                  <Form.Control
+                    type="text"
+                    id="gender"
+                    name="gender"
+                    value={formDataMod.gender}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-            <div>
-                  <label htmlFor="type">Type</label>
-                  <input type="text" id="type" name="type" value={formDataMod.type} onChange={handleChange} />
-            </div>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="clothing_category">
+                    Clothing Category
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    id="clothing_category"
+                    name="clothing_category"
+                    value={formDataMod.clothing_category}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-            <div>
-                  <label htmlFor="age">Age</label>
-                  <input type="text" id="age" name="age" value={formDataMod.age} onChange={handleChange} />
-            </div>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="size">Size</Form.Label>
+                  <Form.Control
+                    type="text"
+                    id="size"
+                    name="size"
+                    value={formDataMod.size}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-            <div>
-                  <label htmlFor="gender">Gender</label>
-                  <input type="text" id="gender" name="gender" value={formDataMod.gender} onChange={handleChange} />
-            </div>
-
-            <div>
-                  <label htmlFor="clothing_category">Clothing Category</label>
-                  <input type="text" id="clothing_category" name="clothing_category" value={formDataMod.clothing_category} onChange={handleChange} />
-            </div>
-
-            <div>
-                  <label htmlFor="size">Size</label>
-                  <input type="text" id="size" name="size" value={formDataMod.size} onChange={handleChange} />
-            </div>
-
-            <div>
-                  <button type="submit">Créer</button>
-            </div>
-      </form>
+                <div>
+                  <Button type="submit">Créer</Button>
+                </div>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Container>
+      </main>
+      <footer className="mt-5">
+        <FooterUser />
+      </footer>
+    </>
+  );
 }
